@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Playfair Cipher | Chamber of Ciphers</title>
+    <meta name="description" content="Learn and use the Playfair Cipher - a digraph substitution cipher">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="cipher-page.css">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="glitch-overlay"></div>
+    <div class="cyber-grid-bg"></div>
+    <canvas id="matrix-canvas"></canvas>
+
+    <div class="cipher-page">
+        <div class="circuit-lines">
+            <div class="circuit-line circuit-line-1"></div>
+            <div class="circuit-line circuit-line-2"></div>
+            <div class="circuit-line circuit-line-3"></div>
+            <div class="circuit-line circuit-line-4"></div>
+        </div>
+
+        <div class="container cipher-container">
+            <div class="cipher-header">
+                <a href="../index.html#challenges" class="back-link">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="19" y1="12" x2="5" y2="12"></line>
+                        <polyline points="12 19 5 12 12 5"></polyline>
+                    </svg>
+                    Back to Ciphers
+                </a>
+
+                <div class="security-badge">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="security-icon-medium">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                    </svg>
+                    <span class="security-label">SECURITY LEVEL:</span>
+                    <div class="security-bars">
+                        <div class="bar bar-red active"></div>
+                        <div class="bar bar-yellow active"></div>
+                        <div class="bar bar-green"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cipher-title-section">
+                <div class="title-glow"></div>
+                <h1 class="cipher-title cyber-glitch-text">Playfair Cipher</h1>
+                <p class="cipher-subtitle">Digraph substitution cipher that encrypts pairs of letters instead of single letters</p>
+            </div>
+
+            <div class="mode-selector">
+                <button class="mode-btn active" data-mode="encrypt">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                        <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                    </svg>
+                    Encrypt
+                </button>
+                <button class="mode-btn" data-mode="decrypt">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                        <path d="M7 11V7a5 5 0 0 1 5-5 5 5 0 0 1 5 5"></path>
+                    </svg>
+                    Decrypt
+                </button>
+            </div>
+
+            <div class="input-section">
+                <div class="section-corners">
+                    <div class="corner corner-tl"></div>
+                    <div class="corner corner-tr"></div>
+                    <div class="corner corner-bl"></div>
+                    <div class="corner corner-br"></div>
+                </div>
+                <div class="scan-line-animated"></div>
+
+                <div class="input-group">
+                    <label class="input-label">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="16 18 22 12 16 6"></polyline>
+                            <polyline points="8 6 2 12 8 18"></polyline>
+                        </svg>
+                        INPUT TEXT
+                    </label>
+                    <div class="textarea-wrapper">
+                        <textarea id="input-text" placeholder="Enter text to encrypt..." class="cipher-textarea"></textarea>
+                        <span class="char-count"><span id="input-count">0</span> CHARS</span>
+                    </div>
+                </div>
+
+                <div class="key-group">
+                    <label class="input-label">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 10a4 4 0 1 0 0-8 4 4 0 0 0 0 8z"/>
+                            <path d="M12 10v12"/>
+                            <path d="m8 18 4 4 4-4"/>
+                        </svg>
+                        Keyword
+                    </label>
+                    <div class="key-input-wrapper">
+                        <svg class="key-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 10a4 4 0 1 0 0-8 4 4 0 0 0 0 8z"/>
+                            <path d="M12 10v12"/>
+                            <path d="m8 18 4 4 4-4"/>
+                        </svg>
+                        <input type="text" id="cipher-key" placeholder="Enter a keyword (letters only)" class="key-input">
+                    </div>
+                </div>
+
+                <div class="process-btn-wrapper">
+                    <button id="process-btn" class="btn btn-primary process-btn">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+                        </svg>
+                        <span id="process-text">ENCRYPT TEXT</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                            <polyline points="12 5 19 12 12 19"></polyline>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <div class="terminal-section hidden" id="terminal-section">
+                <div class="terminal-window">
+                    <div class="terminal-header">
+                        <div class="terminal-btn red"></div>
+                        <div class="terminal-btn yellow"></div>
+                        <div class="terminal-btn green"></div>
+                        <span class="terminal-title">terminal@cyberburgs:~</span>
+                    </div>
+                    <div class="terminal-body" id="terminal-output"></div>
+                </div>
+            </div>
+
+            <div class="output-section">
+                <div class="section-corners indigo">
+                    <div class="corner corner-tl"></div>
+                    <div class="corner corner-tr"></div>
+                    <div class="corner corner-bl"></div>
+                    <div class="corner corner-br"></div>
+                </div>
+                <div class="scan-line-animated indigo"></div>
+
+                <div class="output-group">
+                    <label class="input-label indigo">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="4 17 10 11 4 5"></polyline>
+                            <line x1="12" y1="19" x2="20" y2="19"></line>
+                        </svg>
+                        OUTPUT
+                    </label>
+                    <div class="textarea-wrapper">
+                        <textarea id="output-text" readonly placeholder="Output will appear here..." class="cipher-textarea output"></textarea>
+                        <button id="copy-btn" class="copy-btn hidden">
+                            <svg id="copy-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                            </svg>
+                            <svg id="check-icon" class="hidden" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="status-indicator hidden" id="status-indicator">
+                    <div class="status-dot"></div>
+                    <span class="status-text" id="status-text">ENCRYPTED</span>
+                    <span class="status-divider">|</span>
+                    <span class="status-chars"><span id="output-count">0</span> CHARS</span>
+                </div>
+            </div>
+
+            <div class="details-section">
+                <button class="details-toggle" id="details-toggle">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <line x1="12" y1="16" x2="12" y2="12"></line>
+                        <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                    </svg>
+                    <span>Algorithm Details</span>
+                    <svg id="details-chevron" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="6 9 12 15 18 9"></polyline>
+                    </svg>
+                </button>
+
+                <div class="details-content hidden" id="details-content">
+                    <div class="security-scan-effect"></div>
+                    <p class="details-text">
+                        The Playfair cipher was the first practical digraph substitution cipher. The scheme was invented in 1854 by Charles Wheatstone but was named after Lord Playfair who promoted the use of the cipher. The technique encrypts pairs of letters (digraphs), instead of single letters as in the simple substitution cipher. The Playfair is significantly harder to break since the frequency analysis used for simple substitution ciphers does not work with it. The frequency analysis of digraphs is possible, but considerably more difficult.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../script.js"></script>
+    <script src="cipher-functions.js"></script>
+    <script>initCipherPage('playfair');</script>
+</body>
+</html>
