@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chamber of Ciphers | Cryptography Challenge</title>
+    <meta name="description" content="Decrypt the secrets of cryptography at Cyberburgs' premier encryption challenge event">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Background Effects -->
+    <div class="glitch-overlay"></div>
+    <div class="cyber-grid-bg"></div>
+    <div class="holographic"></div>
+    <div class="digital-noise"></div>
+    <div class="security-scan"></div>
+    <div class="data-stream"></div>
+    <canvas id="matrix-canvas"></canvas>
+
+    <!-- Header -->
+    <header class="header" id="header">
+        <div class="container header-content">
+            <!-- Logo -->
+            <a href="https://www.cyberburgs.com/" target="_blank" rel="noopener noreferrer" class="logo-link">
+                <div class="logo-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                    </svg>
+                    <div class="logo-ring"></div>
+                </div>
+                <span class="logo-text">CYBERBURGS</span>
+            </a>
+
+            <!-- Desktop Navigation -->
+            <nav class="nav-desktop">
+                <a href="#home" class="nav-link active" data-section="home">Home</a>
+                <a href="#about" class="nav-link" data-section="about">About</a>
+                <a href="#challenges" class="nav-link" data-section="challenges">Challenges</a>
+                <a href="#contact" class="nav-link" data-section="contact">Contact</a>
+            </nav>
+
+            <!-- Rotating Logo -->
+            <div class="rotating-logo">
+                <img src="public/images/cb-logo.png" alt="CYBER BURGS Logo" width="40" height="40">
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Toggle menu">
+                <svg class="menu-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="3" y1="12" x2="21" y2="12"></line>
+                    <line x1="3" y1="6" x2="21" y2="6"></line>
+                    <line x1="3" y1="18" x2="21" y2="18"></line>
+                </svg>
+                <svg class="close-icon hidden" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div class="mobile-menu" id="mobile-menu">
+            <nav class="mobile-nav">
+                <a href="#home" class="mobile-nav-link" data-section="home">
+                    <span class="nav-arrow">&gt;</span>
+                    <span>Home</span>
+                </a>
+                <a href="#about" class="mobile-nav-link" data-section="about">
+                    <span class="nav-arrow">&gt;</span>
+                    <span>About</span>
+                </a>
+                <a href="#challenges" class="mobile-nav-link" data-section="challenges">
+                    <span class="nav-arrow">&gt;</span>
+                    <span>Challenges</span>
+                </a>
+                <a href="#contact" class="mobile-nav-link" data-section="contact">
+                    <span class="nav-arrow">&gt;</span>
+                    <span>Contact</span>
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section id="home" class="hero-section">
+            <div class="cyber-grid"></div>
+            <div class="hero-gradient"></div>
+            
+            <div class="container hero-content">
+                <div class="hero-grid">
+                    <div class="hero-text">
+                        <div class="hero-badge">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                            </svg>
+                        </div>
+
+                        <div class="title-container">
+                            <h1 class="animated-title" id="animated-title">
+                                <span class="title-white"></span>
+                                <span class="title-blue"></span>
+                            </h1>
+                            <span class="title-underline"></span>
+                        </div>
+
+                        <p class="hero-description">
+                            Decrypt the secrets of cryptography at Cyberburgs' premier encryption challenge event. Test your skills against classical and modern ciphers.
+                        </p>
+
+                        <div class="hero-cta">
+                            <a href="register.html" class="btn btn-primary cyber-button">
+                                <span>REGISTER</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="hero-visual">
+                        <div class="lock-container">
+                            <div class="security-scan-effect"></div>
+                            <div class="data-stream-effect"></div>
+                            <div class="lock-icon-wrapper">
+                                <svg class="lock-icon" xmlns="http://www.w3.org/2000/svg" width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                                    <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                                </svg>
+                            </div>
+                            <div class="scan-line"></div>
+                        </div>
+                        <div class="visual-circle-1"></div>
+                        <div class="visual-circle-2"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Event Info Section -->
+        <section id="about" class="about-section">
+            <div class="cyber-grid"></div>
+            <div class="container">
+                <div class="event-card">
+                    <div class="card-border-top"></div>
+                    <div class="card-border-bottom"></div>
+
+                    <h2 class="section-title">
+                        EVENT <span class="text-blue">DETAILS</span>
+                    </h2>
+
+                    <div class="event-grid">
+                        <div class="event-item">
+                            <div class="event-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                                    <line x1="16" y1="2" x2="16" y2="6"></line>
+                                    <line x1="8" y1="2" x2="8" y2="6"></line>
+                                    <line x1="3" y1="10" x2="21" y2="10"></line>
+                                </svg>
+                            </div>
+                            <div class="event-info">
+                                <h3>Date</h3>
+                                <p class="event-main">27 May, 2025</p>
+                                <p class="event-sub">One-day immersive experience</p>
+                            </div>
+                        </div>
+
+                        <div class="event-item">
+                            <div class="event-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                    <circle cx="12" cy="10" r="3"></circle>
+                                </svg>
+                            </div>
+                            <div class="event-info">
+                                <h3>Location</h3>
+                                <p class="event-main">Center of Advanced Studies & Engineering University</p>
+                                <p class="event-sub">Main Campus, B 17</p>
+                            </div>
+                        </div>
+
+                        <div class="event-item">
+                            <div class="event-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <polyline points="12 6 12 12 16 14"></polyline>
+                                </svg>
+                            </div>
+                            <div class="event-info">
+                                <h3>Time</h3>
+                                <p class="event-main">10:00 AM - 11:00 AM</p>
+                                <p class="event-sub">Please arrive at the venue on time</p>
+                            </div>
+                        </div>
+
+                        <div class="event-item">
+                            <div class="event-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                                    <circle cx="9" cy="7" r="4"></circle>
+                                    <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                                    <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                                </svg>
+                            </div>
+                            <div class="event-info">
+                                <h3>Participants</h3>
+                                <p class="event-main">Limited Seats Available</p>
+                                <p class="event-sub">Hurry Up! Register now to secure your spot</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Expandable Details -->
+                    <div class="event-details-expanded" id="event-details">
+                        <div class="details-divider"></div>
+                        
+                        <h3 class="details-title">Event Schedule</h3>
+                        <div class="schedule-grid">
+                            <div class="schedule-item">
+                                <span class="schedule-day">Day 1</span>
+                                <span class="schedule-event">GAME OF CIPHERS</span>
+                            </div>
+                            <div class="schedule-item">
+                                <span class="schedule-day">Day 2</span>
+                                <span class="schedule-event">PRICE DISTRIBUTION</span>
+                            </div>
+                        </div>
+
+                        <h3 class="details-title">What to Bring</h3>
+                        <ul class="bring-list">
+                            <li>Calculator</li>
+                            <li>Paper</li>
+                            <li>Pen</li>
+                        </ul>
+                    </div>
+
+                    <div class="details-toggle-container">
+                        <button class="btn btn-ghost" id="toggle-details">
+                            <span id="toggle-text">Show Details</span>
+                            <svg id="chevron-down" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="6 9 12 15 18 9"></polyline>
+                            </svg>
+                            <svg id="chevron-up" class="hidden" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="18 15 12 9 6 15"></polyline>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Challenges Section -->
+        <section id="challenges" class="challenges-section">
+            <div class="container">
+                <!-- Modern Ciphers -->
+                <div class="cipher-category">
+                    <div class="category-header">
+                        <h2 class="category-title text-blue">Modern Ciphers</h2>
+                        <p class="category-description">Explore cutting-edge encryption techniques that secure our digital world</p>
+                    </div>
+
+                    <div class="cipher-grid modern-grid">
+                        <!-- AES -->
+                        <div class="cipher-card" data-cipher="aes">
+                            <div class="card-header">
+                                <div class="cipher-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                                        <path d="m9 12 2 2 4-4"/>
+                                    </svg>
+                                </div>
+                                <h3 class="cipher-name">Advanced Encryption Standard (AES)</h3>
+                            </div>
+                            <div class="card-content">
+                                <p class="cipher-description">Symmetric encryption algorithm used worldwide for secure data transmission</p>
+                                <a href="ciphers/coming-soon.html" class="btn btn-blue">TRY CIPHER</a>
+                            </div>
+                        </div>
+
+                        <!-- Triple DES -->
+                        <div class="cipher-card" data-cipher="des">
+                            <div class="card-header">
+                                <div class="cipher-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <ellipse cx="12" cy="5" rx="9" ry="3"/>
+                                        <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/>
+                                        <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/>
+                                    </svg>
+                                </div>
+                                <h3 class="cipher-name">Triple Data Encryption Standard (DES)</h3>
+                            </div>
+                            <div class="card-content">
+                                <p class="cipher-description">Symmetric-key block cipher that applies the DES cipher algorithm three times to each data block</p>
+                                <a href="ciphers/coming-soon.html" class="btn btn-blue">TRY CIPHER</a>
+                            </div>
+                        </div>
+
+                        <!-- RSA -->
+                        <div class="cipher-card" data-cipher="rsa">
+                            <div class="card-header">
+                                <div class="cipher-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                                        <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                                    </svg>
+                                </div>
+                                <h3 class="cipher-name">Rivest–Shamir–Adleman (RSA)</h3>
+                            </div>
+                            <div class="card-content">
+                                <p class="cipher-description">Public-key cryptosystem widely used for secure data transmission and digital signatures</p>
+                                <a href="ciphers/coming-soon.html" class="btn btn-blue">TRY CIPHER</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- DHKE centered -->
+                    <div class="cipher-grid-centered">
+                        <div class="cipher-card" data-cipher="dhke">
+                            <div class="card-header">
+                                <div class="cipher-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M8 3L4 7l4 4"/>
+                                        <path d="M4 7h16"/>
+                                        <path d="m16 21 4-4-4-4"/>
+                                        <path d="M20 17H4"/>
+                                    </svg>
+                                </div>
+                                <h3 class="cipher-name">Diffie-Hellman Key Exchange (DHKE)</h3>
+                            </div>
+                            <div class="card-content">
+                                <p class="cipher-description">Secure method for exchanging cryptographic keys over a public channel without requiring a pre-shared secret</p>
+                                <a href="ciphers/coming-soon.html" class="btn btn-blue">TRY CIPHER</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cyber-divider"></div>
+
+                <!-- Classical Ciphers -->
+                <div class="cipher-category">
+                    <div class="category-header">
+                        <h2 class="category-title text-indigo">Classical Ciphers</h2>
+                        <p class="category-description">Discover the historical encryption methods that laid the foundation for modern cryptography</p>
+                    </div>
+
+                    <div class="cipher-grid classical-grid">
+                        <!-- Caesar -->
+                        <div class="cipher-card classical" data-cipher="caesar">
+                            <div class="card-header">
+                                <div class="cipher-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M5 9h14M5 15h14"/>
+                                    </svg>
+                                </div>
+                                <h3 class="cipher-name">Caesar Cipher</h3>
+                            </div>
+                            <div class="card-content">
+                                <p class="cipher-description">One of the simplest encryption techniques where each letter is shifted by a fixed number of positions</p>
+                                <a href="ciphers/caesar.html" class="btn btn-indigo">TRY CIPHER</a>
+                            </div>
+                        </div>
+
+                        <!-- Vigenère -->
+                        <div class="cipher-card classical" data-cipher="vigenere">
+                            <div class="card-header">
+                                <div class="cipher-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <rect x="3" y="3" width="7" height="7"/>
+                                        <rect x="14" y="3" width="7" height="7"/>
+                                        <rect x="14" y="14" width="7" height="7"/>
+                                        <rect x="3" y="14" width="7" height="7"/>
+                                    </svg>
+                                </div>
+                                <h3 class="cipher-name">Vigenère Cipher</h3>
+                            </div>
+                            <div class="card-content">
+                                <p class="cipher-description">Polyalphabetic substitution cipher that uses a keyword to determine variable shift values</p>
+                                <a href="ciphers/vigenere.html" class="btn btn-indigo">TRY CIPHER</a>
+                            </div>
+                        </div>
+
+                        <!-- Playfair -->
+                        <div class="cipher-card classical" data-cipher="playfair">
+                            <div class="card-header">
+                                <div class="cipher-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <polyline points="16 3 21 3 21 8"/>
+                                        <line x1="4" y1="20" x2="21" y2="3"/>
+                                        <polyline points="21 16 21 21 16 21"/>
+                                        <line x1="15" y1="15" x2="21" y2="21"/>
+                                        <line x1="4" y1="4" x2="9" y2="9"/>
+                                    </svg>
+                                </div>
+                                <h3 class="cipher-name">Playfair Cipher</h3>
+                            </div>
+                            <div class="card-content">
+                                <p class="cipher-description">Digraph substitution cipher that encrypts pairs of letters instead of single letters</p>
+                                <a href="ciphers/playfair.html" class="btn btn-indigo">TRY CIPHER</a>
+                            </div>
+                        </div>
+
+                        <!-- Rail Fence -->
+                        <div class="cipher-card classical" data-cipher="rail-fence">
+                            <div class="card-header">
+                                <div class="cipher-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <line x1="12" y1="19" x2="12" y2="5"/>
+                                        <polyline points="5 12 12 5 19 12"/>
+                                    </svg>
+                                </div>
+                                <h3 class="cipher-name">Rail Fence Cipher</h3>
+                            </div>
+                            <div class="card-content">
+                                <p class="cipher-description">Transposition cipher that rearranges letters according to a zigzag pattern across multiple rows</p>
+                                <a href="ciphers/rail-fence.html" class="btn btn-indigo">TRY CIPHER</a>
+                            </div>
+                        </div>
+
+                        <!-- Atbash -->
+                        <div class="cipher-card classical" data-cipher="atbash">
+                            <div class="card-header">
+                                <div class="cipher-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M8 3L4 7l4 4"/>
+                                        <path d="M4 7h16"/>
+                                        <path d="m16 21 4-4-4-4"/>
+                                        <path d="M20 17H4"/>
+                                    </svg>
+                                </div>
+                                <h3 class="cipher-name">Atbash Cipher</h3>
+                            </div>
+                            <div class="card-content">
+                                <p class="cipher-description">Simple substitution cipher that maps each letter to its reverse position in the alphabet</p>
+                                <a href="ciphers/atbash.html" class="btn btn-indigo">TRY CIPHER</a>
+                            </div>
+                        </div>
+
+                        <!-- ROT13 -->
+                        <div class="cipher-card classical" data-cipher="rot13">
+                            <div class="card-header">
+                                <div class="cipher-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"/>
+                                        <path d="M21 21v-5h-5"/>
+                                        <path d="M21 12A9 9 0 0 0 12 3a9.75 9.75 0 0 0-6.74 2.74L3 8"/>
+                                        <path d="M3 3v5h5"/>
+                                    </svg>
+                                </div>
+                                <h3 class="cipher-name">ROT13</h3>
+                            </div>
+                            <div class="card-content">
+                                <p class="cipher-description">Simple letter substitution cipher that replaces each letter with the letter 13 positions after it</p>
+                                <a href="ciphers/rot13.html" class="btn btn-indigo">TRY CIPHER</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="contact-section">
+            <div class="cyber-grid"></div>
+            <div class="contact-gradient"></div>
+
+            <div class="container">
+                <div class="contact-wrapper">
+                    <div class="contact-header">
+                        <div class="contact-title-wrapper">
+                            <div class="title-glow"></div>
+                            <h2 class="contact-title">Get in <span class="text-blue">Touch</span></h2>
+                        </div>
+                        <p class="contact-description">
+                            Have questions about the Chamber of Ciphers event? Want to learn more about cryptography?<br>
+                            Send us a message and we'll get back to you.
+                        </p>
+                    </div>
+
+                    <div class="contact-form-wrapper">
+                        <div class="form-container">
+                            <div class="form-corner form-corner-tl"></div>
+                            <div class="form-corner form-corner-br"></div>
+
+                            <form id="contact-form" class="contact-form">
+                                <div class="form-decoration">
+                                    <div class="decoration-line"></div>
+                                    <div class="decoration-icon">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                                        </svg>
+                                    </div>
+                                    <div class="decoration-line"></div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="name" class="form-label">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                                            <circle cx="12" cy="7" r="4"/>
+                                        </svg>
+                                        <span>Name</span>
+                                    </label>
+                                    <div class="input-wrapper">
+                                        <svg class="input-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                                            <circle cx="12" cy="7" r="4"/>
+                                        </svg>
+                                        <input type="text" id="name" name="name" placeholder="Your name" required class="form-input">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="email" class="form-label">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                                            <polyline points="22,6 12,13 2,6"/>
+                                        </svg>
+                                        <span>Email</span>
+                                    </label>
+                                    <div class="input-wrapper">
+                                        <svg class="input-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                                            <polyline points="22,6 12,13 2,6"/>
+                                        </svg>
+                                        <input type="email" id="email" name="email" placeholder="your.email@example.com" required class="form-input">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="message" class="form-label">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                                        </svg>
+                                        <span>Message</span>
+                                    </label>
+                                    <div class="input-wrapper textarea-wrapper">
+                                        <svg class="input-icon textarea-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                                        </svg>
+                                        <textarea id="message" name="message" placeholder="Your message..." required class="form-textarea"></textarea>
+                                    </div>
+                                </div>
+
+                                <div class="form-submit">
+                                    <div class="submit-glow"></div>
+                                    <button type="submit" class="btn btn-primary submit-btn">
+                                        <span>Send Message</span>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <line x1="22" y1="2" x2="11" y2="13"/>
+                                            <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="cyber-grid"></div>
+        <div class="container">
+            <div class="footer-content">
+                <p class="footer-text">
+                    © <span id="current-year">2025</span> Cyberburgs. All rights reserved.
+                    <span class="footer-divider">|</span>
+                    <span class="footer-secure">[SECURE CONNECTION]</span>
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,1142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Team Registration | Chamber of Ciphers</title>
+    <meta name="description" content="Register your team for the Chamber of Ciphers competition">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Registration Page Specific Styles */
+        .register-page {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem 1rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .register-container {
+            width: 100%;
+            max-width: 500px;
+            position: relative;
+        }
+
+        .register-content {
+            position: relative;
+            background: linear-gradient(145deg, rgba(10, 15, 30, 0.98), rgba(5, 10, 20, 0.98));
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            border-radius: 16px;
+            padding: 2rem 1.75rem;
+            overflow: hidden;
+            box-shadow: 0 0 80px rgba(59, 130, 246, 0.15), 0 0 120px rgba(0, 0, 0, 0.5);
+        }
+
+        .register-bg-effects {
+            position: absolute;
+            inset: 0;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .register-grid {
+            position: absolute;
+            inset: 0;
+            background-image: 
+                linear-gradient(rgba(59, 130, 246, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(59, 130, 246, 0.03) 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+
+        .register-scan-line {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.5), transparent);
+            animation: scanMove 3s linear infinite;
+        }
+
+        @keyframes scanMove {
+            0% { top: 0; opacity: 1; }
+            50% { opacity: 0.3; }
+            100% { top: 100%; opacity: 1; }
+        }
+
+        /* Back Button */
+        .back-btn {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            border-radius: 8px;
+            color: var(--color-blue-400);
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+
+        .back-btn:hover {
+            background: rgba(59, 130, 246, 0.1);
+            border-color: var(--color-blue-400);
+            box-shadow: 0 0 15px rgba(59, 130, 246, 0.2);
+        }
+
+        .back-btn svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        /* Header */
+        .register-header {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid rgba(59, 130, 246, 0.15);
+            position: relative;
+            z-index: 1;
+        }
+
+        .register-title {
+            font-family: var(--font-mono);
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            letter-spacing: 0.1em;
+        }
+
+        .register-title .title-white {
+            color: var(--color-white);
+        }
+
+        .register-title .title-blue {
+            color: var(--color-blue-400);
+        }
+
+        .register-subtitle {
+            color: var(--color-gray-400);
+            font-size: 0.9rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .register-status {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 0.35rem 0.85rem;
+            background: rgba(34, 197, 94, 0.1);
+            border: 1px solid rgba(34, 197, 94, 0.3);
+            border-radius: 20px;
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            color: #22c55e;
+            letter-spacing: 0.05em;
+        }
+
+        .register-status .status-dot {
+            width: 6px;
+            height: 6px;
+            background: #22c55e;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(0.8); }
+        }
+
+        /* Form */
+        .team-form {
+            position: relative;
+            z-index: 1;
+        }
+
+        .team-form .form-section {
+            margin-bottom: 1rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid rgba(59, 130, 246, 0.1);
+        }
+
+        .team-form .form-section:last-of-type {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+
+        .team-form .section-header {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.75rem;
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--color-blue-400);
+            letter-spacing: 0.1em;
+        }
+
+        .team-form .section-header svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        .team-form .form-field {
+            margin-bottom: 0.75rem;
+        }
+
+        .team-form .field-label {
+            display: flex;
+            align-items: center;
+            gap: 0.35rem;
+            margin-bottom: 0.4rem;
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: var(--color-blue-400);
+            letter-spacing: 0.08em;
+        }
+
+        .team-form .field-label svg {
+            width: 12px;
+            height: 12px;
+        }
+
+        .team-form .input-field input {
+            width: 100%;
+            padding: 0.65rem 0.85rem;
+            font-family: var(--font-sans);
+            font-size: 0.9rem;
+            color: var(--color-white);
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            border-radius: 8px;
+            outline: none;
+            transition: all 0.3s ease;
+            box-sizing: border-box;
+        }
+
+        .team-form .input-field input:focus {
+            border-color: var(--color-blue-400);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1), 0 0 15px rgba(59, 130, 246, 0.1);
+        }
+
+        .team-form .input-field input::placeholder {
+            color: var(--color-gray-500);
+            font-size: 0.85rem;
+        }
+
+        .team-form .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.75rem;
+        }
+
+        .team-form .form-row .form-field {
+            margin-bottom: 0;
+        }
+
+        /* Member Cards */
+        .team-form .member-card {
+            position: relative;
+            padding: 1rem;
+            margin-top: 0.75rem;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(59, 130, 246, 0.15);
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .team-form .member-card:hover {
+            border-color: rgba(59, 130, 246, 0.3);
+            box-shadow: 0 0 15px rgba(59, 130, 246, 0.1);
+        }
+
+        .team-form .leader-card {
+            background: linear-gradient(135deg, rgba(234, 179, 8, 0.05), rgba(0, 0, 0, 0.3));
+            border-color: rgba(234, 179, 8, 0.2);
+        }
+
+        .team-form .leader-card:hover {
+            border-color: rgba(234, 179, 8, 0.4);
+            box-shadow: 0 0 15px rgba(234, 179, 8, 0.1);
+        }
+
+        .team-form .member-number {
+            position: absolute;
+            top: -10px;
+            left: 14px;
+            padding: 0.2rem 0.6rem;
+            background: var(--color-black);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            border-radius: 20px;
+            font-family: var(--font-mono);
+            font-size: 0.65rem;
+            font-weight: 700;
+            color: var(--color-blue-400);
+            letter-spacing: 0.1em;
+        }
+
+        .team-form .leader-card .member-number {
+            border-color: rgba(234, 179, 8, 0.4);
+            color: #eab308;
+        }
+
+        .team-form .member-fields {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .team-form .member-fields .form-field {
+            margin-bottom: 0;
+        }
+
+        /* Badges */
+        .leader-badge {
+            margin-left: auto;
+            padding: 0.2rem 0.5rem;
+            background: rgba(234, 179, 8, 0.1);
+            border: 1px solid rgba(234, 179, 8, 0.3);
+            border-radius: 4px;
+            font-size: 0.6rem;
+            font-weight: 700;
+            color: #eab308;
+            letter-spacing: 0.1em;
+        }
+
+        .required-badge {
+            margin-left: auto;
+            padding: 0.2rem 0.5rem;
+            background: rgba(59, 130, 246, 0.1);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            border-radius: 4px;
+            font-size: 0.6rem;
+            font-weight: 700;
+            color: var(--color-blue-400);
+            letter-spacing: 0.1em;
+        }
+
+        .optional-badge {
+            margin-left: auto;
+            padding: 0.2rem 0.5rem;
+            background: rgba(100, 100, 100, 0.1);
+            border: 1px solid rgba(100, 100, 100, 0.3);
+            border-radius: 4px;
+            font-size: 0.6rem;
+            font-weight: 700;
+            color: var(--color-gray-400);
+            letter-spacing: 0.1em;
+        }
+
+        /* Add Member Button */
+        .team-form .add-member-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            width: 100%;
+            padding: 0.75rem;
+            background: transparent;
+            border: 2px dashed rgba(59, 130, 246, 0.3);
+            border-radius: 8px;
+            color: var(--color-blue-400);
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .team-form .add-member-btn:hover {
+            background: rgba(59, 130, 246, 0.05);
+            border-color: var(--color-blue-400);
+            box-shadow: 0 0 15px rgba(59, 130, 246, 0.1);
+        }
+
+        .team-form .add-member-btn svg {
+            width: 18px;
+            height: 18px;
+            transition: transform 0.3s ease;
+        }
+
+        .team-form .add-member-btn:hover svg {
+            transform: rotate(90deg);
+        }
+
+        /* Remove Member Button */
+        .team-form .remove-member-btn {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            width: 24px;
+            height: 24px;
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            border-radius: 50%;
+            color: #ef4444;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .team-form .remove-member-btn:hover {
+            background: #ef4444;
+            color: white;
+        }
+
+        .team-form .remove-member-btn svg {
+            width: 12px;
+            height: 12px;
+        }
+
+        /* Optional Member Hidden Fields */
+        .team-form .member3-fields {
+            position: relative;
+        }
+
+        .team-form .member3-fields.hidden {
+            display: none;
+        }
+
+        .team-form .optional-member .add-member-btn {
+            display: flex;
+        }
+
+        .team-form .optional-member .member3-fields:not(.hidden) + .add-member-btn,
+        .team-form .optional-member:has(.member3-fields:not(.hidden)) .add-member-btn {
+            display: none;
+        }
+
+        /* Checkbox */
+        .team-form .form-checkbox {
+            margin: 1rem 0;
+        }
+
+        .team-form .checkbox-container {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.6rem;
+            cursor: pointer;
+            font-size: 0.8rem;
+            color: var(--color-gray-400);
+            line-height: 1.5;
+        }
+
+        .team-form .checkbox-container input {
+            display: none;
+        }
+
+        .team-form .checkmark {
+            width: 18px;
+            height: 18px;
+            flex-shrink: 0;
+            border: 2px solid rgba(59, 130, 246, 0.4);
+            border-radius: 4px;
+            position: relative;
+            transition: all 0.3s ease;
+            margin-top: 2px;
+        }
+
+        .team-form .checkbox-container input:checked ~ .checkmark {
+            background: var(--color-blue-500);
+            border-color: var(--color-blue-500);
+        }
+
+        .team-form .checkmark::after {
+            content: '';
+            position: absolute;
+            left: 5px;
+            top: 1px;
+            width: 5px;
+            height: 10px;
+            border: solid white;
+            border-width: 0 2px 2px 0;
+            transform: rotate(45deg) scale(0);
+            transition: transform 0.2s ease;
+        }
+
+        .team-form .checkbox-container input:checked ~ .checkmark::after {
+            transform: rotate(45deg) scale(1);
+        }
+
+        .team-form .checkbox-text a {
+            color: var(--color-blue-400);
+            text-decoration: none;
+        }
+
+        .team-form .checkbox-text a:hover {
+            text-decoration: underline;
+        }
+
+        /* Submit Button */
+        .team-form .form-submit {
+            margin-top: 1rem;
+        }
+
+        .team-form .submit-btn {
+            position: relative;
+            width: 100%;
+            padding: 0.85rem 1.25rem;
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 0.12em;
+            color: white;
+            background: linear-gradient(135deg, var(--color-blue-600), var(--color-blue-500));
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .team-form .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(59, 130, 246, 0.4);
+        }
+
+        .team-form .submit-btn .btn-text {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .team-form .submit-btn .btn-text svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        .team-form .submit-btn .btn-loader {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .team-form .submit-btn .btn-loader.hidden {
+            display: none;
+        }
+
+        .team-form .submit-btn .btn-glow {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.2), transparent 70%);
+            transform: translateX(-100%);
+            transition: transform 0.5s ease;
+        }
+
+        .team-form .submit-btn:hover .btn-glow {
+            transform: translateX(100%);
+        }
+
+        .team-form .spinner {
+            width: 20px;
+            height: 20px;
+            animation: rotate 1s linear infinite;
+        }
+
+        .team-form .spinner circle {
+            stroke: white;
+            stroke-linecap: round;
+            stroke-dasharray: 80;
+            stroke-dashoffset: 60;
+        }
+
+        @keyframes rotate {
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Security Notice */
+        .team-form .security-notice {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.4rem;
+            margin-top: 1rem;
+            padding-top: 0.75rem;
+            border-top: 1px solid rgba(59, 130, 246, 0.1);
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            color: var(--color-gray-500);
+            letter-spacing: 0.05em;
+        }
+
+        .team-form .security-notice svg {
+            color: #22c55e;
+            width: 14px;
+            height: 14px;
+        }
+
+        /* Success Message */
+        .success-container {
+            display: none;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .success-container.active {
+            display: block;
+        }
+
+        .success-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1.5rem;
+            background: rgba(34, 197, 94, 0.1);
+            border: 2px solid rgba(34, 197, 94, 0.3);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: successPop 0.5s ease;
+        }
+
+        @keyframes successPop {
+            0% { transform: scale(0); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+
+        .success-icon svg {
+            width: 40px;
+            height: 40px;
+            color: #22c55e;
+        }
+
+        .success-container h3 {
+            font-family: var(--font-mono);
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #22c55e;
+            margin-bottom: 1rem;
+            letter-spacing: 0.1em;
+        }
+
+        .success-container p {
+            color: var(--color-gray-400);
+            font-size: 0.9rem;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .success-details {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .success-item {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            color: var(--color-gray-400);
+        }
+
+        .success-item svg {
+            color: var(--color-blue-400);
+        }
+
+        .go-back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 2rem;
+            background: linear-gradient(135deg, var(--color-blue-600), var(--color-blue-500));
+            border: none;
+            border-radius: 8px;
+            color: white;
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .go-back-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(59, 130, 246, 0.4);
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .register-page {
+                padding: 1rem 0.75rem;
+            }
+
+            .register-content {
+                padding: 1.5rem 1.25rem;
+            }
+
+            .register-title {
+                font-size: 1.4rem;
+            }
+
+            .back-btn {
+                top: 0.75rem;
+                left: 0.75rem;
+                padding: 0.4rem 0.8rem;
+                font-size: 0.75rem;
+            }
+
+            .team-form .form-row {
+                grid-template-columns: 1fr;
+                gap: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Effects -->
+    <div class="glitch-overlay"></div>
+    <div class="cyber-grid-bg"></div>
+    <canvas id="matrix-canvas"></canvas>
+
+    <!-- Back Button -->
+    <a href="index.html" class="back-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="19" y1="12" x2="5" y2="12"></line>
+            <polyline points="12 19 5 12 12 5"></polyline>
+        </svg>
+        Back to Home
+    </a>
+
+    <div class="register-page">
+        <div class="register-container">
+            <div class="register-content">
+                <!-- Background Effects -->
+                <div class="register-bg-effects">
+                    <div class="register-grid"></div>
+                    <div class="register-scan-line"></div>
+                </div>
+
+                <!-- Header -->
+                <div class="register-header">
+                    <h1 class="register-title">
+                        <span class="title-white">TEAM</span>
+                        <span class="title-blue">REGISTRATION</span>
+                    </h1>
+                    <p class="register-subtitle">Register your team for Chamber of Ciphers Competition</p>
+                    <div class="register-status">
+                        <span class="status-dot"></span>
+                        <span>TEAM SIZE: 2-3 MEMBERS</span>
+                    </div>
+                </div>
+
+                <!-- Registration Form -->
+                <form class="team-form" id="register-form">
+                    
+                    <!-- Team Info Section -->
+                    <div class="form-section">
+                        <div class="section-header">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                            </svg>
+                            <span>TEAM INFORMATION</span>
+                        </div>
+
+                        <!-- Team Name -->
+                        <div class="form-field">
+                            <label class="field-label">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                                    <circle cx="9" cy="7" r="4"></circle>
+                                    <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                                    <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                                </svg>
+                                <span>TEAM NAME</span>
+                            </label>
+                            <div class="input-field">
+                                <input type="text" id="team-name" name="team_name" placeholder="Enter your team name (e.g., CryptoHunters)" required>
+                            </div>
+                        </div>
+
+                        <!-- Institution -->
+                        <div class="form-field">
+                            <label class="field-label">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path>
+                                    <path d="M6 12v5c3 3 9 3 12 0v-5"></path>
+                                </svg>
+                                <span>INSTITUTION / UNIVERSITY</span>
+                            </label>
+                            <div class="input-field">
+                                <input type="text" id="team-institution" name="institution" placeholder="Enter your institution name" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Team Leader Section -->
+                    <div class="form-section">
+                        <div class="section-header leader-header">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                            </svg>
+                            <span>TEAM LEADER</span>
+                            <span class="leader-badge">CAPTAIN</span>
+                        </div>
+
+                        <div class="member-card leader-card">
+                            <div class="member-number">01</div>
+                            <div class="member-fields">
+                                <div class="form-field">
+                                    <label class="field-label">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                            <circle cx="12" cy="7" r="4"></circle>
+                                        </svg>
+                                        <span>FULL NAME</span>
+                                    </label>
+                                    <div class="input-field">
+                                        <input type="text" name="leader_name" placeholder="Team leader's full name" required>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-field">
+                                        <label class="field-label">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                                                <polyline points="22,6 12,13 2,6"></polyline>
+                                            </svg>
+                                            <span>EMAIL</span>
+                                        </label>
+                                        <div class="input-field">
+                                            <input type="email" name="leader_email" placeholder="Email address" required>
+                                        </div>
+                                    </div>
+                                    <div class="form-field">
+                                        <label class="field-label">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                                            </svg>
+                                            <span>PHONE</span>
+                                        </label>
+                                        <div class="input-field">
+                                            <input type="tel" name="leader_phone" placeholder="Phone number" required>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Team Member 2 Section -->
+                    <div class="form-section">
+                        <div class="section-header member-header">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="12" cy="7" r="4"></circle>
+                            </svg>
+                            <span>TEAM MEMBER 2</span>
+                            <span class="required-badge">REQUIRED</span>
+                        </div>
+
+                        <div class="member-card">
+                            <div class="member-number">02</div>
+                            <div class="member-fields">
+                                <div class="form-field">
+                                    <label class="field-label">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                            <circle cx="12" cy="7" r="4"></circle>
+                                        </svg>
+                                        <span>FULL NAME</span>
+                                    </label>
+                                    <div class="input-field">
+                                        <input type="text" name="member2_name" placeholder="Member's full name" required>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-field">
+                                        <label class="field-label">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                                                <polyline points="22,6 12,13 2,6"></polyline>
+                                            </svg>
+                                            <span>EMAIL</span>
+                                        </label>
+                                        <div class="input-field">
+                                            <input type="email" name="member2_email" placeholder="Email address" required>
+                                        </div>
+                                    </div>
+                                    <div class="form-field">
+                                        <label class="field-label">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                                            </svg>
+                                            <span>PHONE</span>
+                                        </label>
+                                        <div class="input-field">
+                                            <input type="tel" name="member2_phone" placeholder="Phone number" required>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Team Member 3 Section (Optional) -->
+                    <div class="form-section" id="member3-section">
+                        <div class="section-header member-header">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="12" cy="7" r="4"></circle>
+                            </svg>
+                            <span>TEAM MEMBER 3</span>
+                            <span class="optional-badge">OPTIONAL</span>
+                        </div>
+
+                        <div class="member-card optional-member" id="member3-card">
+                            <!-- Add Member Button (shown when not expanded) -->
+                            <button type="button" class="add-member-btn" id="add-member3-btn">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <line x1="12" y1="8" x2="12" y2="16"></line>
+                                    <line x1="8" y1="12" x2="16" y2="12"></line>
+                                </svg>
+                                <span>ADD THIRD MEMBER</span>
+                            </button>
+
+                            <!-- Member 3 Fields (hidden initially) -->
+                            <div class="member3-fields hidden" id="member3-fields">
+                                <div class="member-number">03</div>
+                                <div class="member-fields">
+                                    <div class="form-field">
+                                        <label class="field-label">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                                <circle cx="12" cy="7" r="4"></circle>
+                                            </svg>
+                                            <span>FULL NAME</span>
+                                        </label>
+                                        <div class="input-field">
+                                            <input type="text" name="member3_name" placeholder="Member's full name">
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-field">
+                                            <label class="field-label">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                                                    <polyline points="22,6 12,13 2,6"></polyline>
+                                                </svg>
+                                                <span>EMAIL</span>
+                                            </label>
+                                            <div class="input-field">
+                                                <input type="email" name="member3_email" placeholder="Email address">
+                                            </div>
+                                        </div>
+                                        <div class="form-field">
+                                            <label class="field-label">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                                            </svg>
+                                                <span>PHONE</span>
+                                            </label>
+                                            <div class="input-field">
+                                                <input type="tel" name="member3_phone" placeholder="Phone number">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button type="button" class="remove-member-btn" id="remove-member3-btn">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Terms Checkbox -->
+                    <div class="form-checkbox">
+                        <label class="checkbox-container">
+                            <input type="checkbox" id="reg-terms" name="terms" required>
+                            <span class="checkmark"></span>
+                            <span class="checkbox-text">We agree to the <a href="#">Competition Rules</a>, <a href="#">Terms & Conditions</a> and <a href="#">Privacy Policy</a></span>
+                        </label>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <div class="form-submit">
+                        <button type="submit" class="submit-btn" id="submit-register">
+                            <span class="btn-text">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                                </svg>
+                                REGISTER TEAM
+                            </span>
+                            <span class="btn-loader hidden">
+                                <svg class="spinner" viewBox="0 0 50 50">
+                                    <circle cx="25" cy="25" r="20" fill="none" stroke-width="5"></circle>
+                                </svg>
+                                PROCESSING...
+                            </span>
+                            <div class="btn-glow"></div>
+                        </button>
+                    </div>
+
+                    <!-- Security Notice -->
+                    <div class="security-notice">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                            <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                        </svg>
+                        <span>256-bit SSL Encrypted | Your team data is secure</span>
+                    </div>
+                </form>
+
+                <!-- Success Container -->
+                <div class="success-container" id="success-container">
+                    <div class="success-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                            <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                        </svg>
+                    </div>
+                    <h3>TEAM REGISTERED!</h3>
+                    <p>Your team has been successfully registered for Chamber of Ciphers competition. Check your team leader's email for confirmation and further instructions.</p>
+                    <div class="success-details">
+                        <div class="success-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                                <polyline points="22,6 12,13 2,6"></polyline>
+                            </svg>
+                            <span>Confirmation email sent</span>
+                        </div>
+                        <div class="success-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <polyline points="12 6 12 12 16 14"></polyline>
+                            </svg>
+                            <span>Event details coming soon</span>
+                        </div>
+                    </div>
+                    <a href="index.html" class="go-back-btn">LET'S GO!</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize Matrix Rain
+        function initMatrixRain() {
+            const canvas = document.getElementById('matrix-canvas');
+            if (!canvas) return;
+            
+            const ctx = canvas.getContext('2d');
+            
+            function resize() {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            }
+            resize();
+            window.addEventListener('resize', resize);
+            
+            const chars = 'アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン0123456789ABCDEF';
+            const fontSize = 14;
+            const columns = Math.floor(canvas.width / fontSize);
+            const drops = Array(columns).fill(1);
+            
+            function draw() {
+                ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                
+                ctx.fillStyle = 'rgba(59, 130, 246, 0.4)';
+                ctx.font = `${fontSize}px JetBrains Mono, monospace`;
+                
+                for (let i = 0; i < drops.length; i++) {
+                    const char = chars[Math.floor(Math.random() * chars.length)];
+                    ctx.fillText(char, i * fontSize, drops[i] * fontSize);
+                    
+                    if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                        drops[i] = 0;
+                    }
+                    drops[i]++;
+                }
+            }
+            
+            setInterval(draw, 50);
+        }
+
+        // Add/Remove Third Member
+        function initMemberToggle() {
+            const addBtn = document.getElementById('add-member3-btn');
+            const removeBtn = document.getElementById('remove-member3-btn');
+            const fields = document.getElementById('member3-fields');
+            
+            if (addBtn && fields) {
+                addBtn.addEventListener('click', function() {
+                    fields.classList.remove('hidden');
+                    addBtn.style.display = 'none';
+                });
+            }
+            
+            if (removeBtn && fields && addBtn) {
+                removeBtn.addEventListener('click', function() {
+                    fields.classList.add('hidden');
+                    addBtn.style.display = 'flex';
+                    // Clear the fields
+                    fields.querySelectorAll('input').forEach(input => input.value = '');
+                });
+            }
+        }
+
+        // Form Submission
+        function initFormSubmission() {
+            const form = document.getElementById('register-form');
+            const submitBtn = document.getElementById('submit-register');
+            const successContainer = document.getElementById('success-container');
+            
+            if (form && submitBtn && successContainer) {
+                form.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    // Show loading
+                    const btnText = submitBtn.querySelector('.btn-text');
+                    const btnLoader = submitBtn.querySelector('.btn-loader');
+                    
+                    if (btnText) btnText.classList.add('hidden');
+                    if (btnLoader) btnLoader.classList.remove('hidden');
+                    submitBtn.disabled = true;
+                    
+                    // Simulate form submission
+                    setTimeout(function() {
+                        form.style.display = 'none';
+                        successContainer.classList.add('active');
+                    }, 2000);
+                });
+            }
+        }
+
+        // Initialize everything
+        document.addEventListener('DOMContentLoaded', function() {
+            initMatrixRain();
+            initMemberToggle();
+            initFormSubmission();
+        });
+    </script>
+</body>
+</html>
